@@ -9,7 +9,7 @@ export default defineConfig({
   viewportHeight: 800,
   retries: {
     runMode: 2,      
-    openMode: 2   
+    openMode: 0   
   },
   e2e: {
     baseUrl: 'https://example.cypress.io', 
