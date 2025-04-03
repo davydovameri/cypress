@@ -3,5 +3,4 @@ export const PASSWORDS = {
     passwordRepeatInvalid: 'Snikers0',
     passwordNoNumber: 'Snikers',
     passwordNoUppercase: 'snikerssnikers1',
-    passwordRepeatEmpty: 'Re-enter password required'
 };
