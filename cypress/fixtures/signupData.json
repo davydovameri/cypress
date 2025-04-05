@@ -1,0 +1,15 @@
+{
+  "validUser": {
+    "name": "mariia",
+    "lastName": "davydova",
+    "email": "hello@gmail.com",
+    "password": "Snikers0801"
+  },
+  "invalidUser": {
+    "name": "m",
+    "lastName": "davydova",
+    "email": "mariia@test",
+    "password": "Snikers0801",
+    "repeatPassword": "Snikers"
+  }
+}

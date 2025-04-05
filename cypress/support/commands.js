@@ -8,6 +8,44 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 //
+Cypress.Commands.add('login', {}, (email, password) => {
+    cy.contains('button', 'Sign In').click()
+    cy.get('#signinEmail').type(email);
+    cy.get('#signinPassword').type(password);
+    cy.contains('button', 'Login').click()
+})
+
+Cypress.Commands.add('showErrorMessage', { prevSubject: true }, (subject, isInvalid = true) => {
+    cy.wrap(subject)
+        .focus()
+        .blur()
+        .should((isInvalid) ? 'have.class' : 'not.have.class', 'is-invalid')
+        .next()
+        .should((isInvalid) ? 'exist' : 'not.exist')
+});
+
+Cypress.Commands.overwrite('visit', (originalFn) => {
+    originalFn('https://qauto.forstudy.space/', {
+        auth: {
+            username: 'guest',
+            password: 'welcome2qauto'
+        }
+    })
+})
+
+Cypress.Commands.overwrite('type', (originalFn, element, text, options) => {
+    if (options && options.sensitive) {
+        options.log = false
+        Cypress.log({
+            $el: element,
+            name: 'type',
+            message: '*'.repeat(text.length),
+        })
+    }
+
+    return originalFn(element, text, options)
+})
+
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
