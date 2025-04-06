@@ -1,0 +1,100 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-04-06T17:54:35.621Z",
+    "end": "2025-04-06T17:54:45.563Z",
+    "duration": 9942,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "942a7ceb-4873-446b-b7e6-01f786fa4dba",
+      "title": "",
+      "fullFile": "cypress\\e2e\\lesson 20\\task-garage.cy.js",
+      "file": "cypress\\e2e\\lesson 20\\task-garage.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ac23fd3c-0ead-4ed5-8956-c60ac4e1ad59",
+          "title": "Garage Page",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should add a new car",
+              "fullTitle": "Garage Page should add a new car",
+              "timedOut": null,
+              "duration": 7974,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "garage.createCar(this.data);",
+              "err": {},
+              "uuid": "63e3276e-ae0f-46b1-9c4a-ea6cb930e934",
+              "parentUUID": "ac23fd3c-0ead-4ed5-8956-c60ac4e1ad59",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "63e3276e-ae0f-46b1-9c4a-ea6cb930e934"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 7974,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}

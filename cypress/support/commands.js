@@ -10,8 +10,8 @@
 //
 Cypress.Commands.add('login', {}, (email, password) => {
     cy.contains('button', 'Sign In').click()
-    cy.get('#signinEmail').type(email);
-    cy.get('#signinPassword').type(password);
+    cy.get('#signinEmail').type(Cypress.env('email'));
+    cy.get('#signinPassword').type(Cypress.env('password'));
     cy.contains('button', 'Login').click()
 })
 
@@ -25,7 +25,7 @@ Cypress.Commands.add('showErrorMessage', { prevSubject: true }, (subject, isInva
 });
 
 Cypress.Commands.overwrite('visit', (originalFn) => {
-    originalFn('https://qauto.forstudy.space/', {
+    originalFn(Cypress.env('baseUrl'), {
         auth: {
             username: 'guest',
             password: 'welcome2qauto'
