@@ -8,10 +8,10 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 //
-Cypress.Commands.add('login', {}, (email, password) => {
+Cypress.Commands.add('login', {}, (email = Cypress.env('email'), password = Cypress.env('password')) => {
     cy.contains('button', 'Sign In').click()
-    cy.get('#signinEmail').type(Cypress.env('email'));
-    cy.get('#signinPassword').type(Cypress.env('password'));
+    cy.get('#signinEmail').type(email);
+    cy.get('#signinPassword').type(password);
     cy.contains('button', 'Login').click()
 })
 
