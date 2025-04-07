@@ -8,7 +8,7 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 //
-Cypress.Commands.add('login', {}, (email, password) => {
+Cypress.Commands.add('login', {}, (email = Cypress.env('email'), password = Cypress.env('password')) => {
     cy.contains('button', 'Sign In').click()
     cy.get('#signinEmail').type(email);
     cy.get('#signinPassword').type(password);
@@ -25,7 +25,7 @@ Cypress.Commands.add('showErrorMessage', { prevSubject: true }, (subject, isInva
 });
 
 Cypress.Commands.overwrite('visit', (originalFn) => {
-    originalFn('https://qauto.forstudy.space/', {
+    originalFn(Cypress.env('baseUrl'), {
         auth: {
             username: 'guest',
             password: 'welcome2qauto'
