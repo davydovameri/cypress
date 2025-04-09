@@ -4,4 +4,4 @@ cypress/screenshots
 cypress/videos
 .eslintrc.json
 .prettierrc
-mochawesome-report
+mochawesome-report/
