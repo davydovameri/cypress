@@ -10,6 +10,7 @@ export default class FuelExpenses {
     }
 
     selectors = {
+        vehicleDropdownButton: () => cy.get('#carSelectDropdown'),
         addExpenseButton: () => cy.contains('button[class*="btn-primary"]', 'Add an expense'),
         addExpenseDialogVehicleSelect: () => cy.get('select[id="addExpenseCar"]'),
         addExpenseDialogReportDateInput: () => cy.get('input[id="addExpenseDate"]'),
@@ -20,8 +21,25 @@ export default class FuelExpenses {
         addExpenseDialogAddButton: () => cy.contains('[class*="modal-footer"] button', 'Add'),
         genericExpenseElement: () => cy.get('tbody tr'),
         genericExpenseElementDeleteButton: () => cy.get('button[class="btn btn-delete"]'),
-        genericExpenseElementDeleteExpenseConfirmButton: () => cy.contains('[class*="modal-footer"] button', 'Remove'),
+        genericExpenseElementDeleteExpenseConfirmButton: () => cy.contains('[class*="modal-footer"] button', 'Remove')
     }
+
+    get getDateCellValueFromExpensesTable() {
+        return cy.get('tbody tr').find('td').eq(0).invoke('text')
+    }
+
+    get getMileageCellValueFromExpensesTable() {
+        return cy.get('tbody tr').find('td').eq(1).invoke('text')
+    }
+
+    get getLitersCellValueFromExpensesTable() {
+        return cy.get('tbody tr').find('td').eq(2).invoke('text')
+    }
+
+    get getTotalCostCellValueFromExpensesTable() {
+        return cy.get('tbody tr').find('td').eq(3).invoke('text')
+    }
+
     //**
     // * Add expense
     // * @param expenseData {
@@ -32,6 +50,11 @@ export default class FuelExpenses {
     // "totalCost": 10
     // }
     // */
+
+    selectCarInVehicleDropdown(carName) {
+        this.selectors.vehicleDropdownButton().click();
+        cy.contains('li', `${carName}`).invoke('removeClass', 'disabled').click();
+    }
 
     addFuelExpenses(expenseData) {
         cy.wait(500)
@@ -46,7 +69,7 @@ export default class FuelExpenses {
         this.selectors.addExpenseDialogAddButton().click();
     }
 
-    clearAllExpenses() {
+    clearCarExpenses() {
         cy.wait(500);
         cy.get('body').then(($body) => {
             const isGarageEmpty = $body.find('p.panel-empty_message:contains("You don’t have any fuel expenses filed in")').length > 0;
@@ -60,7 +83,7 @@ export default class FuelExpenses {
                     });
                 });
             } else {
-                cy.log('Garage is already empty — skipping car removal');
+                cy.log('Garage is already empty — skipping car expenses removal');
             }
         });
 

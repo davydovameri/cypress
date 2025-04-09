@@ -24,6 +24,21 @@ Cypress.Commands.add('showErrorMessage', { prevSubject: true }, (subject, isInva
         .should((isInvalid) ? 'exist' : 'not.exist')
 });
 
+Cypress.Commands.add('createExpense', (carId, expenseData) => {
+    cy.request({
+        method: 'POST',
+        url: `${Cypress.env('baseUrl')}/api/expenses`,
+        body: {
+            carId: carId,
+            reportedAt: expenseData.reportedAt,
+            mileage: expenseData.mileage,
+            liters: expenseData.liters,
+            totalCost: expenseData.totalCost,
+            forceMileage: expenseData.forceMileage
+        }
+    });
+});
+
 Cypress.Commands.overwrite('visit', (originalFn) => {
     originalFn(Cypress.env('baseUrl'), {
         auth: {

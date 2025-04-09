@@ -31,6 +31,9 @@ export default class Garage {
     // */
 
     createCar(carData) {
+        cy.intercept('POST', `${Cypress.env('baseUrl')}/api/cars`).as('createCarRequest');
+        console.log(`${Cypress.env('baseUrl')}/api/cars/`)
+
         cy.wait(500);
         this.selectors.addCarButton().should('be.visible').click();
         cy.wait(1000);
@@ -39,6 +42,16 @@ export default class Garage {
         this.selectors.addCarDialogCarModelSelect().select(carData.carModel);
         this.selectors.addCarDialogCarMileageInput().type(carData.mileage);
         this.selectors.addCarDialogAddButton().click();
+
+        cy.wait('@createCarRequest').then((interception) => {
+            expect(interception.response.statusCode).to.eq(201);
+
+            const carId = interception.response.body.data.id;
+            if (Cypress.env('baseUrl').includes("2"))
+                cy.writeFile(`cypress/fixtures/createdCar.qauto2.json`, { id: carId });
+            else
+                cy.writeFile(`cypress/fixtures/createdCar.qauto.json`, { id: carId });
+        });
     }
 
     clearAllCars() {
