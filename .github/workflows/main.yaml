@@ -1,0 +1,33 @@
+name: Run Cypress Tests in Docker
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    types: [opened]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node-22.16.0-chrome-136.0.7103.113-1-ff-138.0.4-edge-136.0.3240.76-1
+
+    env:
+      HOME: /root
+      CYPRESS_baseUrl: ${{ secrets.CYPRESS_baseUrl }}
+      CYPRESS_email: ${{ secrets.CYPRESS_email }}
+      CYPRESS_password: ${{ secrets.CYPRESS_password }}
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Cypress tests
+        run: npx cypress run
